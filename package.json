@@ -4,14 +4,17 @@
   "description": "simple MERN stack",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app_hooked.js"
   },
   "author": "Tabo Mbaleni",
   "license": "ISC",
   "dependencies": {
     "babel-preset-es2015-node6": "^0.4.0",
+    "babel-register": "^6.26.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "express-busboy": "^7.0.1",
     "mongoose": "^5.4.16",
     "morgan": "^1.9.1",
     "source-map-support": "^0.5.10"

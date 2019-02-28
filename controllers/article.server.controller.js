@@ -2,7 +2,7 @@
 import mongoose from 'mongoose';
 
 //import models
-import Todo from '../models/article.server.model';
+import Articles from '../model/article.server.model';
 
 export const getArticles = (req,res) => {
     Articles.find().exec((err,articles) => {
@@ -13,8 +13,8 @@ export const getArticles = (req,res) => {
     });
   }
 
-export const addArticle= (req,res) => {
-    const newArticle = new Article(req.body);
+export const addArticle = (req,res) => {
+    const newArticle = new Articles(req.body);
     newArticle.save((err,article) => {
       if(err){
       return res.json({'success':false,'message':'Some Error'});
@@ -24,7 +24,7 @@ export const addArticle= (req,res) => {
 }
 
 export const updateArticle = (req,res) => {
-    Todo.findOneAndUpdate({ _id:req.body.id }, req.body, { new:true }, (err,article) => {
+    Articles.findOneAndUpdate({ _id:req.body.id }, req.body, { new:true }, (err,article) => {
       if(err){
       return res.json({'success':false,'message':'Some Error','error':err});
       }
@@ -34,7 +34,7 @@ export const updateArticle = (req,res) => {
 }
 
 export const getArticle = (req,res) => {
-    Todo.find({_id:req.params.id}).exec((err,article) => {
+    Articles.find({_id:req.params.id}).exec((err,article) => {
       if(err){
       return res.json({'success':false,'message':'Some Error'});
       }
@@ -48,7 +48,7 @@ export const getArticle = (req,res) => {
 }
 
 export const deleteArticle = (req,res) => {
-    Todo.findByIdAndRemove(req.params.id, (err,article) => {
+    Articles.findByIdAndRemove(req.params.id, (err,article) => {
       if(err){
       return res.json({'success':false,'message':'Some Error'});
       }

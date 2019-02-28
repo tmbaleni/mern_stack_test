@@ -1,11 +1,13 @@
 import express from 'express';
 import path from 'path';
-import bodyparser from 'body-parser';
+import bodyParser from 'body-parser';
 import logger from 'morgan';
-import bb from 'express-busyboy';
+import bb from 'express-busboy';
+import mongoose from 'mongoose';
+import SourceMapSupport from 'source-map-support';
 
 // import routes
-import todoRoutes from './routes/todo.server.route';
+import articleRoutes from './routes/article.server.route';
 // define our app using express
 const app = express();
 
@@ -30,11 +32,14 @@ const port = process.env.PORT || 3001;
 
 // connect to database
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/mern-todo-app', {
+mongoose.connect('mongodb://admin:admin@cluster0-shard-00-00-ubjo9.mongodb.net:27017,cluster0-shard-00-01-ubjo9.mongodb.net:27017,cluster0-shard-00-02-ubjo9.mongodb.net:27017/express?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true', {
   useMongoClient: true,
 });
 
-app.use('/api', todoRoutes);
+// add Source Map Support
+SourceMapSupport.install();
+
+app.use('/api', articleRoutes);
 app.get('/', (req,res) => {
   return res.end('Api working');
 })
